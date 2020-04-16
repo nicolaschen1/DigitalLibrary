@@ -1,0 +1,29 @@
+<%# # app/views/books/index.html.erb %>
+<h1>Liste des livres</h1>
+<% @books.each do |book| %>
+  <p>
+    <a href="/books/<%= book.id %>">
+      <% if book.category %>
+        <%= book.title %> (<%= book.category.name %>)
+      <% else %>
+        <%= book.title %>
+      <% end %>
+    </a>
+  </p>
+<% end %>
+
+<%= form_tag '/books', method: 'post' do %>
+  <br><br>
+  <input type="text" name="title" />
+  <select name="category_id">
+    <% @categories.each do |category| %>
+      <option value="<%= category.id %>"><%= category.name %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Ajouter le livre" />
+<% end %>
+
+<br>
+<p><a href="..">Retourner à la page d'accueil</a></p>
+
+
